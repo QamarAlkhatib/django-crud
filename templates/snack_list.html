@@ -2,8 +2,16 @@
 {% block title %} Snack List {% endblock %}
 
 {% block content %}
+
 <h1>Snack List:</h1>
       <hr>
+   <ul>
+
+      <li><a href ='/create/'>Create Snack</a></li>
+
+   </ul>
+   
+
 
    {% for snack in object_list %}
       <h1>title: <a href ='{{snack.get_absolute_url}}'>{{snack.title}}</a></h1>

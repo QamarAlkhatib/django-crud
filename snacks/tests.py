@@ -36,7 +36,7 @@ class TestSnackDetailView(TestCase):
 
     def test_snack_create_view(self):
         response = self.client.post(
-            reverse("snack_create"),
+            reverse("create_snack"),
             {
                 "title": "Pizza",
                 "purchaser": self.user.id,
@@ -44,18 +44,18 @@ class TestSnackDetailView(TestCase):
             }, follow=True
         )
 
-        self.assertRedirects(response, reverse("snack_detail.html", args="1"))
-        self.assertContains(response, "Details about Pizza")
+        self.assertRedirects(response, reverse("snack_detail", args="2"))
+        
 
     
     def test_snack_update_view_redirect(self):
         response = self.client.post(
-            reverse("snack_update", args="1"),
+            reverse("update_snack", args="1"),
             {"title": "Updated name","description":"new Pizza","purchaser":self.user.id}
         )
         print (response)
         self.assertRedirects(response, reverse("snack_detail", args="1"))
 
     def test_snack_delete_view(self):
-        response = self.client.get(reverse("snack_delete", args="1"))
+        response = self.client.get(reverse("delete_snack", args="1"))
         self.assertEqual(response.status_code, 200)
